@@ -1,0 +1,15 @@
+---
+title: Python
+author: Alisha Nayak
+date: '2020-05-15'
+slug: python
+categories: []
+tags: []
+description: ''
+---
+
+Blogpost about Python
+```{r}
+#code for python
+```
+
