@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Alisha Nayak" />
+    <meta name="description" content="Describe your website">
+    <link rel="shortcut icon" type="image/x-icon" href="/img/favicon.ico">
+    <title>Project 1 - Nayak</title>
+    <meta name="generator" content="Hugo 0.70.0" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/css/main.css" />
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,200bold,400old" />
+    
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+
+    
+  </head>
+
+  <body>
+    <div id="wrap">
+
+      
+      <nav class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/"><i class="fa fa-home"></i></a>
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+    </div>
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav navbar-right">
+      
+        
+        <li><a href="/blog/">BLOG</a></li>
+        
+        <li><a href="/projects/">PROJECTS</a></li>
+        
+        <li><a href="/resume/">RESUME</a></li>
+        
+      
+      </ul>
+    </div>
+  </div>
+</nav>
+
+      
+      <div class="container">
+        <div class="blog-post">
+          <h3>
+            <strong><a href="/anproject1/">Project 1 - Nayak</a></strong>
+          </h3>
+        </div>
+        <div class="blog-title">
+          <h4>
+          January 1, 0001
+            &nbsp;&nbsp;
+            
+          </h4>
+        </div>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="blogpost">
+              
+
+
+<div id="alisha-nayak-an25757" class="section level2">
+<h2>Alisha Nayak (an25757)</h2>
+<pre class="r"><code>library(fivethirtyeight)
+library(MASS)
+library(dplyr)
+library(tidyverse)
+library(cluster)
+library(GGally)</code></pre>
+<pre class="r"><code>#Introduction
+glimpse(bad_drivers)</code></pre>
+<pre><code>## Observations: 51
+## Variables: 8
+## $ state               &lt;chr&gt; &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Arizona&quot;, &quot;Arkansas&quot;, &quot;Cali…
+## $ num_drivers         &lt;dbl&gt; 18.8, 18.1, 18.6, 22.4, 12.0, 13.6, 10.8, 16.2, 5…
+## $ perc_speeding       &lt;int&gt; 39, 41, 35, 18, 35, 37, 46, 38, 34, 21, 19, 54, 3…
+## $ perc_alcohol        &lt;int&gt; 30, 25, 28, 26, 28, 28, 36, 30, 27, 29, 25, 41, 2…
+## $ perc_not_distracted &lt;int&gt; 96, 90, 84, 94, 91, 79, 87, 87, 100, 92, 95, 82, …
+## $ perc_no_previous    &lt;int&gt; 80, 94, 96, 95, 89, 95, 82, 99, 100, 94, 93, 87, …
+## $ insurance_premiums  &lt;dbl&gt; 784.55, 1053.48, 899.47, 827.34, 878.41, 835.50, …
+## $ losses              &lt;dbl&gt; 145.08, 133.93, 110.35, 142.39, 165.63, 139.91, 1…</code></pre>
+<pre class="r"><code>glimpse(USArrests)</code></pre>
+<pre><code>## Observations: 50
+## Variables: 4
+## $ Murder   &lt;dbl&gt; 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4, 5.3, 2…
+## $ Assault  &lt;int&gt; 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46, 120, 2…
+## $ UrbanPop &lt;int&gt; 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 65, 57, …
+## $ Rape     &lt;dbl&gt; 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9, 25.8, …</code></pre>
+<p><em>The two datasets chosen were “bad_drivers”&quot; and “USArrests”. These were chosen because they both had all 50 states as common categorical variables that could be used to join them. These two datasets interested me because I am interested in crime statistics and wanted to see if there was any correlation between violent arrests and the number of fatal crashes in each state. These datasets were found through the fivethirtyeight and MASS packages.</em></p>
+<pre class="r"><code>#Question 1: Tidying/Untidying
+arrests &lt;- rownames_to_column(USArrests, var = &quot;state&quot;)
+glimpse(arrests)</code></pre>
+<pre><code>## Observations: 50
+## Variables: 5
+## $ state    &lt;chr&gt; &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Arizona&quot;, &quot;Arkansas&quot;, &quot;California&quot;, &quot;C…
+## $ Murder   &lt;dbl&gt; 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4, 5.3, 2…
+## $ Assault  &lt;int&gt; 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46, 120, 2…
+## $ UrbanPop &lt;int&gt; 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 65, 57, …
+## $ Rape     &lt;dbl&gt; 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9, 25.8, …</code></pre>
+<pre class="r"><code>#untidy with pivot_longer()
+UntidyRates &lt;- arrests %&gt;% 
+  pivot_longer(cols = c(Murder, Assault, Rape), names_to = &quot;Arrests&quot;, values_to=&quot;Amount of Arrests&quot;) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 150
+## Variables: 4
+## $ state               &lt;chr&gt; &quot;Alabama&quot;, &quot;Alabama&quot;, &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Alask…
+## $ UrbanPop            &lt;int&gt; 58, 58, 58, 48, 48, 48, 80, 80, 80, 50, 50, 50, 9…
+## $ Arrests             &lt;chr&gt; &quot;Murder&quot;, &quot;Assault&quot;, &quot;Rape&quot;, &quot;Murder&quot;, &quot;Assault&quot;,…
+## $ `Amount of Arrests` &lt;dbl&gt; 13.2, 236.0, 21.2, 10.0, 263.0, 44.5, 8.1, 294.0,…</code></pre>
+<pre class="r"><code>#tidy with pivot_wider()
+TidyRates &lt;- UntidyRates %&gt;%
+  pivot_wider(names_from=&quot;Arrests&quot;, values_from=&quot;Amount of Arrests&quot;) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 50
+## Variables: 5
+## $ state    &lt;chr&gt; &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Arizona&quot;, &quot;Arkansas&quot;, &quot;California&quot;, &quot;C…
+## $ UrbanPop &lt;int&gt; 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 83, 65, 57, …
+## $ Murder   &lt;dbl&gt; 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 17.4, 5.3, 2…
+## $ Assault  &lt;dbl&gt; 236, 263, 294, 190, 276, 204, 110, 238, 335, 211, 46, 120, 2…
+## $ Rape     &lt;dbl&gt; 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 31.9, 25.8, …</code></pre>
+<p><em>The dataset USArrests was found tidy. It was made untidy using pivot_longer, and made tidy again using pivot_wider. The untidy dataset contained the different values for murder, assault, and rape as separate entries per state. The urban population variable was untouched. By using pivot_wider, the dataset was reverted back to how it was originally, with separate columns for the murder, assault, and rape variables.</em></p>
+<pre class="r"><code>#Question 2: Join
+Joined &lt;- inner_join(bad_drivers,arrests,by = c(&quot;state&quot;)) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 50
+## Variables: 12
+## $ state               &lt;chr&gt; &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Arizona&quot;, &quot;Arkansas&quot;, &quot;Cali…
+## $ num_drivers         &lt;dbl&gt; 18.8, 18.1, 18.6, 22.4, 12.0, 13.6, 10.8, 16.2, 1…
+## $ perc_speeding       &lt;int&gt; 39, 41, 35, 18, 35, 37, 46, 38, 21, 19, 54, 36, 3…
+## $ perc_alcohol        &lt;int&gt; 30, 25, 28, 26, 28, 28, 36, 30, 29, 25, 41, 29, 3…
+## $ perc_not_distracted &lt;int&gt; 96, 90, 84, 94, 91, 79, 87, 87, 92, 95, 82, 85, 9…
+## $ perc_no_previous    &lt;int&gt; 80, 94, 96, 95, 89, 95, 82, 99, 94, 93, 87, 98, 9…
+## $ insurance_premiums  &lt;dbl&gt; 784.55, 1053.48, 899.47, 827.34, 878.41, 835.50, …
+## $ losses              &lt;dbl&gt; 145.08, 133.93, 110.35, 142.39, 165.63, 139.91, 1…
+## $ Murder              &lt;dbl&gt; 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 1…
+## $ Assault             &lt;int&gt; 236, 263, 294, 190, 276, 204, 110, 238, 335, 211,…
+## $ UrbanPop            &lt;int&gt; 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 8…
+## $ Rape                &lt;dbl&gt; 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 3…</code></pre>
+<p><em>An inner join was used to join the two datasets by “state”. This ensures that there are 50 categorical observations. An inner join was chosen to exclude the District of Colombia, as it was present in only the bad_drivers dataset.</em></p>
+<pre class="r"><code>#Question 3: Summary Stats
+
+#Summary stats for the number of drivers
+Joined %&gt;%
+  summarize(meannum_drivers = mean(num_drivers, na.rm=T), n(), sd(num_drivers), var(num_drivers), quantile(num_drivers,.75), min(num_drivers), max(num_drivers), n_distinct(num_drivers), cor(num_drivers, perc_speeding)) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 1
+## Variables: 9
+## $ meannum_drivers                   &lt;dbl&gt; 15.988
+## $ `n()`                             &lt;int&gt; 50
+## $ `sd(num_drivers)`                 &lt;dbl&gt; 3.911711
+## $ `var(num_drivers)`                &lt;dbl&gt; 15.30149
+## $ `quantile(num_drivers, 0.75)`     &lt;dbl&gt; 18.55
+## $ `min(num_drivers)`                &lt;dbl&gt; 8.2
+## $ `max(num_drivers)`                &lt;dbl&gt; 23.9
+## $ `n_distinct(num_drivers)`         &lt;int&gt; 44
+## $ `cor(num_drivers, perc_speeding)` &lt;dbl&gt; -0.0186636</code></pre>
+<pre class="r"><code>#Summary stats for the percentage of speeding
+Joined %&gt;%
+  summarize(meanperc_speeding = mean(perc_speeding, na.rm=T), n(), sd(perc_speeding), var(perc_speeding), quantile(perc_speeding,.75), min(perc_speeding), max(perc_speeding), n_distinct(perc_speeding), cor(num_drivers, perc_speeding)) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 1
+## Variables: 9
+## $ meanperc_speeding                 &lt;dbl&gt; 31.68
+## $ `n()`                             &lt;int&gt; 50
+## $ `sd(perc_speeding)`               &lt;dbl&gt; 9.725708
+## $ `var(perc_speeding)`              &lt;dbl&gt; 94.58939
+## $ `quantile(perc_speeding, 0.75)`   &lt;dbl&gt; 38
+## $ `min(perc_speeding)`              &lt;int&gt; 13
+## $ `max(perc_speeding)`              &lt;int&gt; 54
+## $ `n_distinct(perc_speeding)`       &lt;int&gt; 29
+## $ `cor(num_drivers, perc_speeding)` &lt;dbl&gt; -0.0186636</code></pre>
+<pre class="r"><code>#Summary stats for the percentage under alcohol consumption
+Joined %&gt;%
+  summarize(meanperc_alcohol = mean(perc_alcohol, na.rm=T), n(), sd(perc_alcohol), var(perc_alcohol), quantile(perc_alcohol,.75), min(perc_alcohol), max(perc_alcohol), n_distinct(perc_alcohol), cor(perc_alcohol, perc_speeding)) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 1
+## Variables: 9
+## $ meanperc_alcohol                   &lt;dbl&gt; 30.76
+## $ `n()`                              &lt;int&gt; 50
+## $ `sd(perc_alcohol)`                 &lt;dbl&gt; 5.156965
+## $ `var(perc_alcohol)`                &lt;dbl&gt; 26.59429
+## $ `quantile(perc_alcohol, 0.75)`     &lt;dbl&gt; 33
+## $ `min(perc_alcohol)`                &lt;int&gt; 16
+## $ `max(perc_alcohol)`                &lt;int&gt; 44
+## $ `n_distinct(perc_alcohol)`         &lt;int&gt; 19
+## $ `cor(perc_alcohol, perc_speeding)` &lt;dbl&gt; 0.2914061</code></pre>
+<pre class="r"><code>#Summary stats for percentage not distracted in accidents
+Joined %&gt;%
+  summarize(meanperc_ndistracted = mean(perc_not_distracted, na.rm=T), n(), sd(perc_not_distracted), var(perc_not_distracted), quantile(perc_not_distracted,.75), min(perc_not_distracted), max(perc_not_distracted), n_distinct(perc_not_distracted), cor(perc_not_distracted, perc_speeding)) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 1
+## Variables: 9
+## $ meanperc_ndistracted                      &lt;dbl&gt; 85.64
+## $ `n()`                                     &lt;int&gt; 50
+## $ `sd(perc_not_distracted)`                 &lt;dbl&gt; 15.17753
+## $ `var(perc_not_distracted)`                &lt;dbl&gt; 230.3576
+## $ `quantile(perc_not_distracted, 0.75)`     &lt;dbl&gt; 94.75
+## $ `min(perc_not_distracted)`                &lt;int&gt; 10
+## $ `max(perc_not_distracted)`                &lt;int&gt; 99
+## $ `n_distinct(perc_not_distracted)`         &lt;int&gt; 25
+## $ `cor(perc_not_distracted, perc_speeding)` &lt;dbl&gt; 0.1284723</code></pre>
+<pre class="r"><code>#Summary stats for number of arrests for murder
+Joined %&gt;%
+  dplyr::select(Murder, Assault) %&gt;%
+  summarize(meanmurders = mean(Murder, na.rm=T), n(), sd(Murder), var(Murder), quantile(Murder,.75), min(Murder), max(Murder), n_distinct(Murder), cor(Murder, Assault)) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 1
+## Variables: 9
+## $ meanmurders              &lt;dbl&gt; 7.788
+## $ `n()`                    &lt;int&gt; 50
+## $ `sd(Murder)`             &lt;dbl&gt; 4.35551
+## $ `var(Murder)`            &lt;dbl&gt; 18.97047
+## $ `quantile(Murder, 0.75)` &lt;dbl&gt; 11.25
+## $ `min(Murder)`            &lt;dbl&gt; 0.8
+## $ `max(Murder)`            &lt;dbl&gt; 17.4
+## $ `n_distinct(Murder)`     &lt;int&gt; 43
+## $ `cor(Murder, Assault)`   &lt;dbl&gt; 0.8018733</code></pre>
+<pre class="r"><code>#Summary stats for number of arrests for assault
+Joined %&gt;%
+  summarize(meanassault = mean(Assault, na.rm=T), n(), sd(Assault), var(Assault), quantile(Assault,.75), min(Assault), max(Assault), n_distinct(Assault), cor(Murder, Assault)) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 1
+## Variables: 9
+## $ meanassault               &lt;dbl&gt; 170.76
+## $ `n()`                     &lt;int&gt; 50
+## $ `sd(Assault)`             &lt;dbl&gt; 83.33766
+## $ `var(Assault)`            &lt;dbl&gt; 6945.166
+## $ `quantile(Assault, 0.75)` &lt;dbl&gt; 249
+## $ `min(Assault)`            &lt;int&gt; 45
+## $ `max(Assault)`            &lt;int&gt; 337
+## $ `n_distinct(Assault)`     &lt;int&gt; 45
+## $ `cor(Murder, Assault)`    &lt;dbl&gt; 0.8018733</code></pre>
+<pre class="r"><code>#Summary stats for number of arrests for rape
+Joined %&gt;%
+  summarize(meanrape = mean(Rape, na.rm=T), n(), sd(Rape), var(Rape), quantile(Rape,.75), min(Rape), max(Rape), n_distinct(Rape), cor(Rape, Murder)) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 1
+## Variables: 9
+## $ meanrape               &lt;dbl&gt; 21.232
+## $ `n()`                  &lt;int&gt; 50
+## $ `sd(Rape)`             &lt;dbl&gt; 9.366385
+## $ `var(Rape)`            &lt;dbl&gt; 87.72916
+## $ `quantile(Rape, 0.75)` &lt;dbl&gt; 26.175
+## $ `min(Rape)`            &lt;dbl&gt; 7.3
+## $ `max(Rape)`            &lt;dbl&gt; 46
+## $ `n_distinct(Rape)`     &lt;int&gt; 48
+## $ `cor(Rape, Murder)`    &lt;dbl&gt; 0.5635788</code></pre>
+<pre class="r"><code>#Number of alcohol related fatal crashes
+mutateJoined &lt;- Joined %&gt;%
+  group_by(state) %&gt;%
+  mutate(num_alcohol = num_drivers*(perc_alcohol/100)) %&gt;%
+  arrange() %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 50
+## Variables: 13
+## Groups: state [50]
+## $ state               &lt;chr&gt; &quot;Alabama&quot;, &quot;Alaska&quot;, &quot;Arizona&quot;, &quot;Arkansas&quot;, &quot;Cali…
+## $ num_drivers         &lt;dbl&gt; 18.8, 18.1, 18.6, 22.4, 12.0, 13.6, 10.8, 16.2, 1…
+## $ perc_speeding       &lt;int&gt; 39, 41, 35, 18, 35, 37, 46, 38, 21, 19, 54, 36, 3…
+## $ perc_alcohol        &lt;int&gt; 30, 25, 28, 26, 28, 28, 36, 30, 29, 25, 41, 29, 3…
+## $ perc_not_distracted &lt;int&gt; 96, 90, 84, 94, 91, 79, 87, 87, 92, 95, 82, 85, 9…
+## $ perc_no_previous    &lt;int&gt; 80, 94, 96, 95, 89, 95, 82, 99, 94, 93, 87, 98, 9…
+## $ insurance_premiums  &lt;dbl&gt; 784.55, 1053.48, 899.47, 827.34, 878.41, 835.50, …
+## $ losses              &lt;dbl&gt; 145.08, 133.93, 110.35, 142.39, 165.63, 139.91, 1…
+## $ Murder              &lt;dbl&gt; 13.2, 10.0, 8.1, 8.8, 9.0, 7.9, 3.3, 5.9, 15.4, 1…
+## $ Assault             &lt;int&gt; 236, 263, 294, 190, 276, 204, 110, 238, 335, 211,…
+## $ UrbanPop            &lt;int&gt; 58, 48, 80, 50, 91, 78, 77, 72, 80, 60, 83, 54, 8…
+## $ Rape                &lt;dbl&gt; 21.2, 44.5, 31.0, 19.5, 40.6, 38.7, 11.1, 15.8, 3…
+## $ num_alcohol         &lt;dbl&gt; 5.640, 4.525, 5.208, 5.824, 3.360, 3.808, 3.888, …</code></pre>
+<pre class="r"><code>#Number of states with an urban population above 75%
+Joined %&gt;% 
+  dplyr::select(state, UrbanPop) %&gt;% 
+  filter(UrbanPop &gt; 75) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 14
+## Variables: 2
+## $ state    &lt;chr&gt; &quot;Arizona&quot;, &quot;California&quot;, &quot;Colorado&quot;, &quot;Connecticut&quot;, &quot;Florida…
+## $ UrbanPop &lt;int&gt; 80, 91, 78, 77, 80, 83, 83, 85, 81, 89, 86, 87, 80, 80</code></pre>
+<pre class="r"><code>#Percentage of total violent arrests related to murder
+Joined %&gt;%
+  dplyr::select(&quot;State&quot; = state, Murder, Assault, Rape) %&gt;%
+  summarize(mean(Murder)/(mean(Murder)+mean(Assault)+mean(Rape))) %&gt;%
+  glimpse()</code></pre>
+<pre><code>## Observations: 1
+## Variables: 1
+## $ `mean(Murder)/(mean(Murder) + mean(Assault) + mean(Rape))` &lt;dbl&gt; 0.03898288</code></pre>
+<p><em>Summary stats were generated for 6 variables (out of 11 total numerical variables). This shows differences in the spread of these numbers and percentages. A new column was created through mutate to determine the number of alcohol related fatal crashes. This was done by multiplying the total number of fatal crashes by the percentage of crashes caused by alcohol. Then, the amount of states with an urban population above 75% of the total population were found. 14 states have an urban population at or above 75% of the state’s total population. Lastly, the proportion of arrests that were related to murder was found. This was done by dividing the mean number of murders over all 50 states by the sum of the means of all other violent arrests. It is found that about 3.89% of all violent arrests (murder, assault, or rape related) are murder-related.</em></p>
+<pre class="r"><code>#Question 4: Plots
+
+#Plot 1
+Joined %&gt;% 
+  group_by(state) %&gt;%
+  ggplot(aes(Murder, state, color = UrbanPop))+
+  scale_color_gradient(low=&quot;yellow&quot;, high=&quot;pink&quot;)+
+  labs(y = &quot;State&quot;, x = &quot;Number of Murders (100,000s)&quot;)+
+  scale_x_continuous(breaks = c(0,2,4,6,8,10,12,14,16,18,20))+
+  geom_point(stat = &quot;summary&quot;)</code></pre>
+<p><img src="/anproject1_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#Plot 2
+Joined %&gt;% 
+  group_by(state) %&gt;%
+  ggplot(aes(UrbanPop, perc_alcohol, color = Assault))+
+  scale_color_gradient(low=&quot;yellow&quot;, high=&quot;blue&quot;)+
+  labs(y = &quot;Percentage of Lethal Deaths Due to Alcohol&quot;, x = &quot;Percentage of State Population in Urban Areas&quot;)+
+  geom_point()+
+  geom_line(col = &quot;pink&quot;)</code></pre>
+<p><img src="/anproject1_files/figure-html/unnamed-chunk-6-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#Plot 3 (Heat map)
+JoinedHeatmap &lt;- column_to_rownames(Joined, var = &quot;state&quot;) 
+JoinedHeatmap %&gt;% 
+  cor()</code></pre>
+<pre><code>##                     num_drivers perc_speeding perc_alcohol perc_not_distracted
+## num_drivers          1.00000000  -0.018663595   0.17578538          0.05932482
+## perc_speeding       -0.01866360   1.000000000   0.29140608          0.12847227
+## perc_alcohol         0.17578538   0.291406080   1.00000000          0.05780096
+## perc_not_distracted  0.05932482   0.128472265   0.05780096          1.00000000
+## perc_no_previous     0.06712173   0.006442366  -0.22911225         -0.23432699
+## insurance_premiums  -0.10465864   0.033770006   0.01517102         -0.02285529
+## losses              -0.03506761  -0.061579945  -0.08344099         -0.06018868
+## Murder               0.30385895  -0.161149683  -0.07608945         -0.14970290
+## Assault              0.07426956  -0.018855170  -0.10878544         -0.09570018
+##                     perc_no_previous insurance_premiums      losses      Murder
+## num_drivers              0.067121733       -0.104658639 -0.03506761  0.30385895
+## perc_speeding            0.006442366        0.033770006 -0.06157994 -0.16114968
+## perc_alcohol            -0.229112249        0.015171025 -0.08344099 -0.07608945
+## perc_not_distracted     -0.234326992       -0.022855291 -0.06018868 -0.14970290
+## perc_no_previous         1.000000000        0.004128919  0.04183540  0.14817155
+## insurance_premiums       0.004128919        1.000000000  0.65250245  0.40697388
+## losses                   0.041835397        0.652502452  1.00000000  0.50833585
+## Murder                   0.148171547        0.406973877  0.50833585  1.00000000
+## Assault                  0.264540182        0.487514295  0.43518724  0.80187331
+##                         Assault    UrbanPop        Rape
+## num_drivers          0.07426956 -0.53808314 -0.07197763
+## perc_speeding       -0.01885517  0.17361911  0.06300058
+## perc_alcohol        -0.10878544  0.01106723 -0.24840083
+## perc_not_distracted -0.09570018  0.05552506  0.01462523
+## perc_no_previous     0.26454018 -0.04400821  0.30845033
+## insurance_premiums   0.48751429  0.49088145  0.32081859
+## losses               0.43518724  0.33214545  0.25217955
+## Murder               0.80187331  0.06957262  0.56357883
+## Assault              1.00000000  0.25887170  0.66524123
+##  [ reached getOption(&quot;max.print&quot;) -- omitted 2 rows ]</code></pre>
+<pre class="r"><code>JoinedCor &lt;- JoinedHeatmap %&gt;% cor()
+head(JoinedCor)</code></pre>
+<pre><code>##                     num_drivers perc_speeding perc_alcohol perc_not_distracted
+## num_drivers          1.00000000  -0.018663595   0.17578538          0.05932482
+## perc_speeding       -0.01866360   1.000000000   0.29140608          0.12847227
+## perc_alcohol         0.17578538   0.291406080   1.00000000          0.05780096
+## perc_not_distracted  0.05932482   0.128472265   0.05780096          1.00000000
+## perc_no_previous     0.06712173   0.006442366  -0.22911225         -0.23432699
+## insurance_premiums  -0.10465864   0.033770006   0.01517102         -0.02285529
+##                     perc_no_previous insurance_premiums      losses      Murder
+## num_drivers              0.067121733       -0.104658639 -0.03506761  0.30385895
+## perc_speeding            0.006442366        0.033770006 -0.06157994 -0.16114968
+## perc_alcohol            -0.229112249        0.015171025 -0.08344099 -0.07608945
+## perc_not_distracted     -0.234326992       -0.022855291 -0.06018868 -0.14970290
+## perc_no_previous         1.000000000        0.004128919  0.04183540  0.14817155
+## insurance_premiums       0.004128919        1.000000000  0.65250245  0.40697388
+##                         Assault    UrbanPop        Rape
+## num_drivers          0.07426956 -0.53808314 -0.07197763
+## perc_speeding       -0.01885517  0.17361911  0.06300058
+## perc_alcohol        -0.10878544  0.01106723 -0.24840083
+## perc_not_distracted -0.09570018  0.05552506  0.01462523
+## perc_no_previous     0.26454018 -0.04400821  0.30845033
+## insurance_premiums   0.48751429  0.49088145  0.32081859</code></pre>
+<pre class="r"><code>library(reshape2)
+melt.matrix &lt;- melt(JoinedCor)
+head(melt.matrix)</code></pre>
+<pre><code>##                  Var1        Var2       value
+## 1         num_drivers num_drivers  1.00000000
+## 2       perc_speeding num_drivers -0.01866360
+## 3        perc_alcohol num_drivers  0.17578538
+## 4 perc_not_distracted num_drivers  0.05932482
+## 5    perc_no_previous num_drivers  0.06712173
+## 6  insurance_premiums num_drivers -0.10465864</code></pre>
+<pre class="r"><code>ggplot(data = melt.matrix, aes(x=Var1, y=Var2, fill=value)) + 
+  geom_tile()+
+  labs(y = &quot;Joined Variables&quot;, x = &quot;Joined Variables&quot;)+
+  scale_fill_gradient(low=&quot;white&quot;, high=&quot;pink&quot;)</code></pre>
+<p><img src="/anproject1_files/figure-html/unnamed-chunk-6-3.png" width="672" style="display: block; margin: auto;" />
+<em>Plot one is a scatter plot that compares the number of murders (by the 100,000s) to each state, with color acting as a third variable that shows the percentage of population in each state that lives in urban areas. This was meant to show if there was any correlation between higher number of murders and if there is a higher urban population percentage as a result. There is no correlation between these two variables, as we would have seen the points become more pink as the number of murders increased if there was a connection.</em></p>
+<p><em>The second plot relates the percentage of lethal car accidents due to alcohol and the percentage of the population living in urban areas. The third variable in this plot is the number of arrests due to assault. This plot was meant to find if there was a relation between the percentage of the population living in urban areas and higher fatal crashes due to alcohol as well as assault. However, there is no correlation between these three variables.</em></p>
+<p><em>The third plot is a heat map of all the variables to determine if there is any strong correlations between two variables. According to the heat map, the only two variables slightly more correlated to each other is murder and assault. Separately there is no correlation between </em></p>
+<pre class="r"><code>#Question 5
+
+pam_dat &lt;- Joined %&gt;%
+  dplyr::select(Murder, Assault)
+murderassault&lt;-vector()
+for(i in 2:12){
+  pam_fit &lt;- pam(pam_dat, k = i)
+  murderassault[i] &lt;- pam_fit$silinfo$avg.width 
+  }
+ggplot()+
+  geom_line(aes(x=1:12,y=murderassault))+
+  scale_x_continuous(name=&quot;k&quot;,breaks=1:12)</code></pre>
+<p><img src="/anproject1_files/figure-html/unnamed-chunk-7-1.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>#selected 8 clusters
+
+pam8 &lt;- Joined %&gt;%
+  dplyr::select(-state) %&gt;%
+  pam(8)
+  
+finalpam&lt;-Joined %&gt;%
+  mutate(cluster = as.factor(pam8$clustering))
+confpam &lt;- finalpam %&gt;%
+  group_by(state) %&gt;%
+  count(cluster) %&gt;%
+  arrange(desc(n))
+
+ggplot(finalpam, aes(x = Murder,y = Assault, color = cluster))+
+  geom_point()</code></pre>
+<p><img src="/anproject1_files/figure-html/unnamed-chunk-7-2.png" width="672" style="display: block; margin: auto;" /></p>
+<pre class="r"><code>Joined %&gt;%
+  mutate(cluster=as.factor(pam8$clustering)) %&gt;% 
+  ggpairs(columns = 2:6, aes(color=cluster))</code></pre>
+<p><img src="/anproject1_files/figure-html/unnamed-chunk-7-3.png" width="672" style="display: block; margin: auto;" />
+<em>A k-means and PAM analysis were run to compare the first five numeric variables to eachother to determine the correlation between them. Running a line plot with the comparisons of the variables, it was determined that 8 clusters were the ideal number for analysis. Correlation maps were created, with the highest correlation being between percentage of fatal accidents caused by alcohol and caused by speeding. The correlation was 0.291. The lowest correlation between two variables was between those that were in fatal car accidents that had been in no previous accidents, and those that were speeding. They cad a correlation of 0.00644.</em></p>
+</div>
+
+              <hr>
+              <div class="related-posts">
+                <h5>Related Posts</h5>
+                
+              </div>
+            </div>
+          </div>
+          <hr>
+        <div class="disqus">
+  <div id="disqus_thread"></div>
+  <script type="text/javascript">
+
+    (function() {
+      
+      
+      if (window.location.hostname == "localhost")
+        return;
+
+      var disqus_shortname = '';
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  <a href="http://disqus.com/" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+</div>
+        </div>
+      </div>
+      
+    </div>
+
+    
+    <footer>
+  <div id="footer">
+    <div class="container">
+      <p class="text-muted">&copy; All rights reserved. Powered by <a href="https://gohugo.io/">Hugo</a> and
+      <a href="http://www.github.com/nurlansu/hugo-sustain/">sustain</a> with ♥</p>
+    </div>
+  </div>
+</footer>
+<div class="footer"></div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/docs.min.js"></script>
+<script src="/js/main.js"></script>
+
+<script src="/js/ie10-viewport-bug-workaround.js"></script>
+
+
+    
+  </body>
+</html>
