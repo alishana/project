@@ -8,8 +8,25 @@ tags: []
 description: ''
 ---
 
-Blogpost about Python
-```{r}
+Python is a programming language which can be used for more general data science whereas R is used mainly for statistical analysis. Here's a little bit about me in a python code.
+```{python}
 #code for python
+
+alisha_dict = {
+'firstName': 'Alisha',
+'lastName': 'Nayak',
+'hobbies': ['movies','reading','crocheting/knitting', 'soccer', 'Animal Crossing'], 'occupation': ['student'], 'age': 21
+}
+
+print(alisha_dict)
+
+```
+
+We can also use python to adjust text to make it easier to read.
+```{python}
+import re
+string="EtOH was used in the experiment"
+re.sub(r"EtOH","Ethanol",string)
+
 ```
 

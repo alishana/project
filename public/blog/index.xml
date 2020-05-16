@@ -17,8 +17,8 @@
       <pubDate>Fri, 15 May 2020 00:00:00 +0000</pubDate>
       
       <guid>/blog/python/</guid>
-      <description> Blogpost about Python
-#code for python </description>
+      <description>Python is a programming language which can be used for more general data science whereas R is used mainly for statistical analysis. Here’s a little bit about me in a python code.
+#code for python alisha_dict = { &amp;#39;firstName&amp;#39;: &amp;#39;Alisha&amp;#39;, &amp;#39;lastName&amp;#39;: &amp;#39;Nayak&amp;#39;, &amp;#39;hobbies&amp;#39;: [&amp;#39;movies&amp;#39;,&amp;#39;reading&amp;#39;,&amp;#39;crocheting/knitting&amp;#39;, &amp;#39;soccer&amp;#39;, &amp;#39;Animal Crossing&amp;#39;], &amp;#39;occupation&amp;#39;: [&amp;#39;student&amp;#39;], &amp;#39;age&amp;#39;: 21 } print(alisha_dict) ## {&amp;#39;firstName&amp;#39;: &amp;#39;Alisha&amp;#39;, &amp;#39;lastName&amp;#39;: &amp;#39;Nayak&amp;#39;, &amp;#39;hobbies&amp;#39;: [&amp;#39;movies&amp;#39;, &amp;#39;reading&amp;#39;, &amp;#39;crocheting/knitting&amp;#39;, &amp;#39;soccer&amp;#39;, &amp;#39;Animal Crossing&amp;#39;], &amp;#39;occupation&amp;#39;: [&amp;#39;student&amp;#39;], &amp;#39;age&amp;#39;: 21} We can also use python to adjust text to make it easier to read.</description>
     </item>
     
   </channel>

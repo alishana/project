@@ -72,8 +72,22 @@
               
 
 
-<p>Blogpost about Python</p>
-<pre class="r"><code>#code for python</code></pre>
+<p>Python is a programming language which can be used for more general data science whereas R is used mainly for statistical analysis. Here’s a little bit about me in a python code.</p>
+<pre class="python"><code>#code for python
+
+alisha_dict = {
+&#39;firstName&#39;: &#39;Alisha&#39;,
+&#39;lastName&#39;: &#39;Nayak&#39;,
+&#39;hobbies&#39;: [&#39;movies&#39;,&#39;reading&#39;,&#39;crocheting/knitting&#39;, &#39;soccer&#39;, &#39;Animal Crossing&#39;], &#39;occupation&#39;: [&#39;student&#39;], &#39;age&#39;: 21
+}
+
+print(alisha_dict)</code></pre>
+<pre><code>## {&#39;firstName&#39;: &#39;Alisha&#39;, &#39;lastName&#39;: &#39;Nayak&#39;, &#39;hobbies&#39;: [&#39;movies&#39;, &#39;reading&#39;, &#39;crocheting/knitting&#39;, &#39;soccer&#39;, &#39;Animal Crossing&#39;], &#39;occupation&#39;: [&#39;student&#39;], &#39;age&#39;: 21}</code></pre>
+<p>We can also use python to adjust text to make it easier to read.</p>
+<pre class="python"><code>import re
+string=&quot;EtOH was used in the experiment&quot;
+re.sub(r&quot;EtOH&quot;,&quot;Ethanol&quot;,string)</code></pre>
+<pre><code>## &#39;Ethanol was used in the experiment&#39;</code></pre>
 
               <hr>
               <div class="related-posts">
