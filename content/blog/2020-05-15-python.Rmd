@@ -32,5 +32,5 @@ re.sub(r"EtOH","Ethanol",string)
 
 And there you have it! Here's a picture of one of my dogs, Milo.
 
-![Milo, 6 ](/blog/2020-05-15-python_files/IMG_7589.PNG)
+![Milo, 6](/blog/2020-05-15-python_files/IMG_7589.PNG){width=200px height=400px}
 
